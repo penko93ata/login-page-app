@@ -1,0 +1,55 @@
+/* Base input styles */
+.input {
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  color: #374151;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1.5;
+  padding: 8px 12px;
+  height: 40px;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input:hover:not(:disabled):not(:focus) {
+  border-color: #9ca3af;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: #f9fafb;
+  color: #6b7280;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+/* Full width variant */
+.fullWidth {
+  width: 100%;
+}
+
+/* Input types */
+.input[type="password"] {
+  font-family: monospace;
+  letter-spacing: 0.1em;
+}
+
+.input[type="email"] {
+  text-transform: lowercase;
+}
+
+.input[type="number"] {
+  text-align: right;
+}

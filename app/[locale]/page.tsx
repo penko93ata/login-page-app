@@ -1,12 +1,15 @@
 import { Button, Input } from "@/components/ui";
 import styles from "./page.module.css";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
+  const t = useTranslations("LoginPage");
+
   return (
     <div className={styles.page}>
       <div>
         <Button size='lg' variant='primary'>
-          Primary
+          {t("login")}
         </Button>
         <Button size='sm' variant='secondary'>
           Secondary

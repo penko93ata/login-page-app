@@ -13,8 +13,8 @@ type ThemeContextProps = {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>("light");
   const isDarkModePreferred = useIsDarkMode();
+  const [theme, setTheme] = useState<Theme>((localStorage.getItem("theme") as Theme) ?? "light");
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));

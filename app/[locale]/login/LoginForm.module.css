@@ -1,0 +1,19 @@
+.loginFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loginFormHeaderContainer {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.loginFormHeaderTitle {
+  margin-bottom: 0.5rem;
+}
+
+.loginFormHeaderSubtitle {
+  color: var(--color-muted-foreground);
+}

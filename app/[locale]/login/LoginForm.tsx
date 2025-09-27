@@ -7,13 +7,17 @@ import { useFormStatus } from "react-dom";
 import { login } from "./action";
 import { useAuth } from "@/lib/features/auth/useAuth";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+
+import styles from "./LoginForm.module.css";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
+  const t = useTranslations("LoginPage");
 
   return (
     <Button type='submit' size='lg' variant='primary' loading={pending} disabled={pending}>
-      {pending ? "Signing In..." : "Sign In"}
+      {pending ? t("signingIn") : t("signIn")}
     </Button>
   );
 }
@@ -22,6 +26,7 @@ export default function LoginForm() {
   const [state, loginAction] = useActionState(login, undefined);
   const { setAuthUser } = useAuth();
   const router = useRouter();
+  const t = useTranslations("LoginPage");
 
   // Handle successful login
   useEffect(() => {
@@ -45,8 +50,13 @@ export default function LoginForm() {
   };
 
   return (
-    <>
-      <form action={loginAction}>
+    <div className={styles.loginFormContainer}>
+      <div className={styles.loginFormHeaderContainer}>
+        <h1 className={styles.loginFormHeaderTitle}>{t("title")}</h1>
+        <p className={styles.loginFormHeaderSubtitle}>{t("subtitle")}</p>
+      </div>
+
+      <form action={loginAction} style={{ width: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
         {/* Show general errors at the top of the form */}
         {getGeneralError() && (
           <div
@@ -63,14 +73,23 @@ export default function LoginForm() {
           </div>
         )}
 
-        <FormField label='Email' name='email' type='email' placeholder='your@email.com' required errorMessage={getFieldError("email")} />
+        <FormField
+          label={t("email")}
+          name='email'
+          type='email'
+          placeholder={t("emailPlaceholder")}
+          required
+          fullWidth
+          errorMessage={getFieldError("email")}
+        />
 
         <FormField
-          label='Password'
+          label={t("password")}
           name='password'
           type='password'
-          placeholder='••••••••'
+          placeholder={t("passwordPlaceholder")}
           required
+          fullWidth
           errorMessage={getFieldError("password")}
         />
 
@@ -78,8 +97,8 @@ export default function LoginForm() {
       </form>
 
       <div style={{ textAlign: "center", marginTop: "1rem" }}>
-        <Link href='/forgot-password'>Forgot Password?</Link>
+        <Link href='/forgot-password'>{t("forgotPassword")}</Link>
       </div>
-    </>
+    </div>
   );
 }

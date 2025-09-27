@@ -7,6 +7,7 @@ import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { useTheme } from "@/contexts/ThemeContext";
+import Link from "next/link";
 
 type LanguageItem = {
   code: (typeof routing.locales)[number];
@@ -15,8 +16,9 @@ type LanguageItem = {
 };
 
 const navigationItems = [
-  { key: "about", label: "About" },
-  { key: "contact", label: "Contact" },
+  { key: "/login", label: "Login" },
+  { key: "/about", label: "About" },
+  { key: "/contact", label: "Contact" },
 ];
 
 const languages: LanguageItem[] = [
@@ -44,9 +46,9 @@ export default function Sidebar() {
 
       <nav className={styles.navigation}>
         {navigationItems.map((item) => (
-          <button key={item.key} className={styles.navItem} onClick={() => null}>
+          <Link key={item.key} href={item.key} className={`${styles.navItem} ${pathname === item.key ? styles.active : ""}`}>
             <span className={styles.navLabel}>{item.label}</span>
-          </button>
+          </Link>
         ))}
       </nav>
 

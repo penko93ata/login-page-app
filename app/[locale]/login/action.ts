@@ -5,7 +5,7 @@ import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import z from "zod";
 
-export const passwordSchema = z
+const passwordSchema = z
   .string()
   .min(9, "Password must be more than 8 characters")
   .regex(/[A-Z]/, "Password must contain at least one uppercase letter")

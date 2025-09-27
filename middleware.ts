@@ -6,6 +6,8 @@ import { decryptSession } from "./lib/session";
 const protectedRoutes = ["/"];
 const publicRoutes = ["/login", "/forgot-password", "/about", "/contact"];
 
+const intlMiddleware = createMiddleware(routing);
+
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
@@ -22,10 +24,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
-  return NextResponse.next();
+  return intlMiddleware(request);
 }
 
-export default createMiddleware(routing);
+// export default createMiddleware(routing);
 
 export const config = {
   matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",

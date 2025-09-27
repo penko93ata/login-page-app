@@ -14,11 +14,28 @@ const passwordSchema = z
   .trim();
 
 const loginSchema = z.object({
-  email: z.email({ error: "Invalid email address" }).trim(),
+  email: z.string().email("Invalid email address").min(1, "Email is required").trim(),
   password: passwordSchema,
 });
 
-export async function login(prevState: unknown, formData: FormData) {
+// Type for the treeified error structure
+export type LoginActionState =
+  | {
+      errors?: {
+        errors?: string[];
+        properties?: {
+          email?: {
+            errors?: string[];
+          };
+          password?: {
+            errors?: string[];
+          };
+        };
+      };
+    }
+  | undefined;
+
+export async function login(prevState: unknown, formData: FormData): Promise<LoginActionState> {
   const result = loginSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {
@@ -35,7 +52,7 @@ export async function login(prevState: unknown, formData: FormData) {
     if (!user) {
       return {
         errors: {
-          email: ["Invalid email or password"],
+          errors: ["Invalid email or password"],
         },
       };
     }
@@ -47,7 +64,7 @@ export async function login(prevState: unknown, formData: FormData) {
     console.error("Login failed:", error);
     return {
       errors: {
-        email: ["Login failed. Please try again."],
+        errors: ["Login failed. Please try again."],
       },
     };
   }

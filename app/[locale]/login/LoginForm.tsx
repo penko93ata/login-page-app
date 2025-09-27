@@ -8,18 +8,26 @@ import { login } from "./action";
 
 export default function LoginForm() {
   const [state, loginAction] = useActionState(login, undefined);
+  console.log(state);
 
   return (
     <>
       <form action={loginAction}>
-        <FormField label='Email' name='email' type='email' placeholder='your@email.com' required />
+        <FormField
+          label='Email'
+          name='email'
+          type='email'
+          placeholder='your@email.com'
+          required
+          errorMessage={state?.errors?.properties?.email?.errors?.join("\r\n")}
+        />
 
         <FormField
           label='Password'
           name='password'
           type='password'
           placeholder='••••••••'
-          errorMessage='Password must be at least 8 characters'
+          errorMessage={state?.errors?.properties?.password?.errors?.join("\r\n")}
           required
         />
 

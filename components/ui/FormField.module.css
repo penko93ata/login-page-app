@@ -14,6 +14,7 @@
   color: var(--color-destructive);
   margin-top: 6px;
   line-height: 1.4;
+  white-space: pre;
 }
 
 .helperText {

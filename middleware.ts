@@ -27,8 +27,6 @@ export async function middleware(request: NextRequest) {
   return intlMiddleware(request);
 }
 
-// export default createMiddleware(routing);
-
 export const config = {
   matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };

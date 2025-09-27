@@ -15,11 +15,7 @@ type LanguageItem = {
   name: string;
 };
 
-const navigationItems = [
-  { key: "/login", label: "Login" },
-  { key: "/about", label: "About" },
-  { key: "/contact", label: "Contact" },
-];
+const navigationItems = [{ key: "/login", label: "Login" }];
 
 const languages: LanguageItem[] = [
   { code: "en", flag: "🇺🇸", name: "English" },

@@ -1,8 +1,80 @@
 {
+  "Common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "required": "Required"
+  },
+  "Navigation": {
+    "login": "Login",
+    "logout": "Logout",
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "Theme": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode"
+  },
+  "Language": {
+    "english": "English",
+    "bulgarian": "Български",
+    "selectLanguage": "Select Language"
+  },
   "LoginPage": {
-    "title": "Login Page",
-    "username": "Username",
+    "title": "Sign In",
+    "subtitle": "Welcome back! Please sign in to your account.",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
     "password": "Password",
-    "login": "Login"
+    "passwordPlaceholder": "•••••••••",
+    "signIn": "Sign In",
+    "signingIn": "Signing In...",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "rememberMe": "Remember me",
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "loginFailed": "Login failed. Please try again.",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "passwordTooShort": "Password must be more than 8 characters",
+      "passwordMissingUppercase": "Password must contain at least one uppercase letter",
+      "passwordMissingNumber": "Password must contain at least one number",
+      "passwordMissingSpecialChar": "Password must contain at least one special character"
+    }
+  },
+  "HomePage": {
+    "title": "Welcome",
+    "subtitle": "You are successfully logged in.",
+    "loggedInAs": "Logged in as",
+    "lastLogin": "Last login",
+    "accountType": "Account type"
+  },
+  "Sidebar": {
+    "logout": "Logout",
+    "themeToggle": "Toggle theme",
+    "languageSelector": "Language selector"
+  },
+  "FormField": {
+    "required": "This field is required",
+    "invalid": "This field is invalid"
+  },
+  "Button": {
+    "loading": "Loading...",
+    "disabled": "Disabled"
   }
 }

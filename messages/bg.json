@@ -1,8 +1,80 @@
 {
+  "Common": {
+    "loading": "Зареждане...",
+    "error": "Грешка",
+    "success": "Успех",
+    "cancel": "Отказ",
+    "save": "Запазване",
+    "delete": "Изтриване",
+    "edit": "Редактиране",
+    "close": "Затваряне",
+    "back": "Назад",
+    "next": "Напред",
+    "previous": "Предишен",
+    "submit": "Изпращане",
+    "required": "Задължително"
+  },
+  "Navigation": {
+    "login": "Вход",
+    "logout": "Изход",
+    "home": "Начало",
+    "dashboard": "Табло",
+    "profile": "Профил",
+    "settings": "Настройки"
+  },
+  "Theme": {
+    "switchToLight": "Превключи към светъл режим",
+    "switchToDark": "Превключи към тъмен режим",
+    "lightMode": "Светъл режим",
+    "darkMode": "Тъмен режим"
+  },
+  "Language": {
+    "english": "English",
+    "bulgarian": "Български",
+    "selectLanguage": "Избери език"
+  },
   "LoginPage": {
-    "title": "Страница за вход",
-    "username": "Потребителско име",
+    "title": "Вход",
+    "subtitle": "Добре дошли отново! Моля, влезте в акаунта си.",
+    "email": "Имейл",
+    "emailPlaceholder": "вашия@имейл.com",
     "password": "Парола",
-    "login": "Вход"
+    "passwordPlaceholder": "•••••••••",
+    "signIn": "Вход",
+    "signingIn": "Влизане...",
+    "forgotPassword": "Забравена парола?",
+    "noAccount": "Нямате акаунт?",
+    "signUp": "Регистрация",
+    "rememberMe": "Запомни ме",
+    "errors": {
+      "invalidCredentials": "Невалиден имейл или парола",
+      "loginFailed": "Неуспешен вход. Моля, опитайте отново.",
+      "emailRequired": "Имейлът е задължителен",
+      "emailInvalid": "Невалиден имейл адрес",
+      "passwordTooShort": "Паролата трябва да бъде повече от 8 символа",
+      "passwordMissingUppercase": "Паролата трябва да съдържа поне една главна буква",
+      "passwordMissingNumber": "Паролата трябва да съдържа поне една цифра",
+      "passwordMissingSpecialChar": "Паролата трябва да съдържа поне един специален символ"
+    }
+  },
+  "HomePage": {
+    "title": "Добре дошли",
+    "subtitle": "Успешно сте влезли в системата.",
+    "loggedInAs": "Влезли сте като",
+    "lastLogin": "Последен вход",
+    "accountType": "Тип акаунт"
+  },
+  "Sidebar": {
+    "logout": "Изход",
+    "themeToggle": "Превключи тема",
+    "languageSelector": "Избор на език"
+  },
+  "FormField": {
+    "required": "Това поле е задължително",
+    "invalid": "Това поле е невалидно"
+  },
+  "Button": {
+    "loading": "Зареждане...",
+    "disabled": "Деактивиран"
   }
 }

@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import styles from "./Sidebar.module.css";
-import { useLocale } from "next-intl";
+import { Messages, useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -16,7 +16,11 @@ type LanguageItem = {
   name: string;
 };
 
-const navigationItems = [{ key: "/login", label: "Login", showWhenAuthenticated: false }];
+type NavigationItem = {
+  key: string;
+  labelKey: keyof Messages["Navigation"];
+  showWhenAuthenticated: boolean;
+};
 
 const languages: LanguageItem[] = [
   { code: "en", flag: "🇺🇸", name: "English" },
@@ -30,18 +34,28 @@ export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const { isAuthenticated, logout } = useAuth();
+  const t = useTranslations("Navigation");
+  const tTheme = useTranslations("Theme");
+  const tSidebar = useTranslations("Sidebar");
+
+  const navigationItems: NavigationItem[] = [
+    { key: "/login", labelKey: "login" as keyof Messages["Navigation"], showWhenAuthenticated: false },
+  ];
 
   const currentLanguage = languages.find((lang) => lang.code === locale);
+
+  const getThemeToggleTitle = () => {
+    return theme === "light" ? tTheme("switchToDark") : tTheme("switchToLight");
+  };
 
   return (
     <aside className={styles.sidebar}>
       <div className={styles.header}>
-        {/* Logout icon here if user is logged in */}
-        <button className={styles.themeToggle} onClick={toggleTheme} title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
+        <button className={styles.themeToggle} onClick={toggleTheme} title={getThemeToggleTitle()} aria-label={tSidebar("themeToggle")}>
           {theme === "light" ? "🌙" : "☀️"}
         </button>
         {isAuthenticated && (
-          <button className={styles.logoutButton} onClick={logout} title='Logout'>
+          <button className={styles.logoutButton} onClick={logout} title={t("logout")} aria-label={tSidebar("logout")}>
             🚪
           </button>
         )}
@@ -52,13 +66,17 @@ export default function Sidebar() {
           .filter((item) => item.showWhenAuthenticated === isAuthenticated)
           .map((item) => (
             <Link key={item.key} href={item.key} className={`${styles.navItem} ${pathname === item.key ? styles.active : ""}`}>
-              <span className={styles.navLabel}>{item.label}</span>
+              <span className={styles.navLabel}>{t(item.labelKey as keyof Messages["Navigation"])}</span>
             </Link>
           ))}
       </nav>
 
       <div className={styles.languageSelector}>
-        <button className={styles.languageButton} onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}>
+        <button
+          className={styles.languageButton}
+          onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+          aria-label={tSidebar("languageSelector")}
+        >
           <span className={styles.languageFlag}>{currentLanguage?.flag}</span>
           <span className={styles.languageName}>{currentLanguage?.name}</span>
           <span className={`${styles.dropdownArrow} ${isLanguageDropdownOpen ? styles.open : ""}`}>▼</span>

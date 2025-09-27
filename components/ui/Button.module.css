@@ -13,6 +13,16 @@
   font-family: inherit;
 }
 
+.button:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.button:active:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(0);
+}
+
 .button:focus-visible {
   outline: 2px solid var(--color-ring);
   outline-offset: 2px;
@@ -62,12 +72,12 @@
 
 .primary:hover:not(:disabled) {
   background-color: var(--color-primary);
-  opacity: 0.9;
+  box-shadow: 0 0 0 3px var(--color-ring);
 }
 
 .primary:active:not(:disabled) {
   background-color: var(--color-primary);
-  opacity: 0.8;
+  box-shadow: 0 0 0 3px var(--color-ring);
 }
 
 .secondary {
@@ -78,12 +88,10 @@
 
 .secondary:hover:not(:disabled) {
   background-color: var(--color-secondary);
-  opacity: 0.8;
 }
 
 .secondary:active:not(:disabled) {
   background-color: var(--color-secondary);
-  opacity: 0.7;
 }
 
 .outline {
@@ -99,7 +107,6 @@
 
 .outline:active:not(:disabled) {
   background-color: var(--color-accent);
-  opacity: 0.8;
 }
 
 .ghost {

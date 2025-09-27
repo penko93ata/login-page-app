@@ -48,6 +48,12 @@ export default function Sidebar() {
     return theme === "light" ? tTheme("switchToDark") : tTheme("switchToLight");
   };
 
+  const handleLanguageChange = (langCode: (typeof routing.locales)[number]) => {
+    // Only change locale, don't refresh the page
+    router.replace(pathname, { locale: langCode });
+    setIsLanguageDropdownOpen(false);
+  };
+
   return (
     <aside className={styles.sidebar}>
       <div className={styles.header}>
@@ -88,11 +94,7 @@ export default function Sidebar() {
               <button
                 key={lang.code}
                 className={`${styles.languageOption} ${locale === lang.code ? styles.selected : ""}`}
-                onClick={() => {
-                  router.replace(pathname, { locale: lang.code });
-                  router.refresh();
-                  setIsLanguageDropdownOpen(false);
-                }}
+                onClick={() => handleLanguageChange(lang.code)}
               >
                 <span className={styles.languageFlag}>{lang.flag}</span>
                 <span className={styles.languageName}>{lang.name}</span>

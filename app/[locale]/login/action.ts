@@ -1,6 +1,6 @@
 "use server";
 
-import { validateCredentials } from "@/lib/auth";
+import { validateCredentials, getCurrentUser } from "@/lib/auth";
 import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import z from "zod";
@@ -32,6 +32,13 @@ export type LoginActionState =
           };
         };
       };
+      success?: boolean;
+      user?: {
+        id: string;
+        email: string;
+        name: string;
+        role: string;
+      };
     }
   | undefined;
 
@@ -59,7 +66,16 @@ export async function login(prevState: unknown, formData: FormData): Promise<Log
 
     await createSession(user.id);
 
-    redirect("/");
+    // Return success with user data so the client can dispatch Redux action
+    return {
+      success: true,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
+    };
   } catch (error) {
     console.error("Login failed:", error);
     return {
@@ -68,6 +84,34 @@ export async function login(prevState: unknown, formData: FormData): Promise<Log
       },
     };
   }
+}
+
+// Server action to check current authentication status
+export async function checkAuthAction() {
+  try {
+    const user = await getCurrentUser();
+
+    if (!user) {
+      return { user: null, isAuthenticated: false };
+    }
+
+    return { user, isAuthenticated: true };
+  } catch (error) {
+    console.error("Server action checkAuth error:", error);
+    return { user: null, isAuthenticated: false };
+  }
+}
+
+// Server action to logout user
+export async function logoutAction() {
+  try {
+    await deleteSession();
+  } catch (error) {
+    console.error("Server action logout error:", error);
+    throw new Error("Logout failed");
+  }
+
+  redirect("/login");
 }
 
 export async function logout() {

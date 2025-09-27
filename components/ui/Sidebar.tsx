@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { useTheme } from "@/contexts/ThemeContext";
 import Link from "next/link";
+import { useAuth } from "@/lib/features/auth/useAuth";
 
 type LanguageItem = {
   code: (typeof routing.locales)[number];
@@ -15,7 +16,7 @@ type LanguageItem = {
   name: string;
 };
 
-const navigationItems = [{ key: "/login", label: "Login" }];
+const navigationItems = [{ key: "/login", label: "Login", showWhenAuthenticated: false }];
 
 const languages: LanguageItem[] = [
   { code: "en", flag: "🇺🇸", name: "English" },
@@ -28,6 +29,7 @@ export default function Sidebar() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const { isAuthenticated, logout } = useAuth();
 
   const currentLanguage = languages.find((lang) => lang.code === locale);
 
@@ -38,14 +40,21 @@ export default function Sidebar() {
         <button className={styles.themeToggle} onClick={toggleTheme} title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
           {theme === "light" ? "🌙" : "☀️"}
         </button>
+        {isAuthenticated && (
+          <button className={styles.logoutButton} onClick={logout} title='Logout'>
+            🚪
+          </button>
+        )}
       </div>
 
       <nav className={styles.navigation}>
-        {navigationItems.map((item) => (
-          <Link key={item.key} href={item.key} className={`${styles.navItem} ${pathname === item.key ? styles.active : ""}`}>
-            <span className={styles.navLabel}>{item.label}</span>
-          </Link>
-        ))}
+        {navigationItems
+          .filter((item) => item.showWhenAuthenticated === isAuthenticated)
+          .map((item) => (
+            <Link key={item.key} href={item.key} className={`${styles.navItem} ${pathname === item.key ? styles.active : ""}`}>
+              <span className={styles.navLabel}>{item.label}</span>
+            </Link>
+          ))}
       </nav>
 
       <div className={styles.languageSelector}>

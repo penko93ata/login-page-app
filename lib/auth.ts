@@ -1,6 +1,8 @@
 import bcrypt from "bcryptjs";
 import fs from "fs";
+import { cookies } from "next/headers";
 import path from "path";
+import { decryptSession } from "./session";
 
 export interface User {
   id: string;
@@ -33,6 +35,12 @@ export function findUserByEmail(email: string): User | null {
   return users.find((user) => user.email.toLowerCase() === email.toLowerCase()) || null;
 }
 
+// Find user by ID
+export function findUserById(id: string): User | null {
+  const users = getUsers();
+  return users.find((user) => user.id === id) || null;
+}
+
 // Validate user credentials
 export async function validateCredentials(email: string, password: string): Promise<User | null> {
   const user = findUserByEmail(email);
@@ -41,7 +49,6 @@ export async function validateCredentials(email: string, password: string): Prom
     return null;
   }
 
-  // Compare password with hashed password
   const isValidPassword = await bcrypt.compare(password, user.password);
 
   if (!isValidPassword) {
@@ -58,13 +65,39 @@ export async function hashPassword(password: string): Promise<string> {
   return bcrypt.hash(password, 12);
 }
 
-// For development: Get plain text passwords for the demo users
-// export const DEMO_CREDENTIALS = {
-//   "admin@example.com": "secret123",
-//   "user@example.com": "password",
-//   "test@test.com": "secret",
-// } as const;
+// Get current authenticated user
+export async function getCurrentUser(): Promise<User | null> {
+  try {
+    const cookieStore = await cookies();
+    const cookie = cookieStore.get("session")?.value;
 
+    if (!cookie) {
+      return null;
+    }
+
+    const session = await decryptSession(cookie);
+
+    if (!session?.userId) {
+      return null;
+    }
+
+    // Find the full user object using the userId from session
+    const user = findUserById(session.userId as string);
+
+    if (!user) {
+      return null;
+    }
+
+    // Return user without password for security
+    const { password: _, ...userWithoutPassword } = user;
+    return userWithoutPassword as User;
+  } catch (error) {
+    console.error("getCurrentUser error:", error);
+    return null;
+  }
+}
+
+// For development: Strong passwords that meet the new requirements
 export const DEMO_CREDENTIALS = {
   "admin@example.com": "Admin123!", // ✅ Strong password
   "user@example.com": "Password1@", // ✅ Strong password

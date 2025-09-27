@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import styles from "./layout.module.css";
 import Sidebar from "@/components/ui/Sidebar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import StoreProvider from "../StoreProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,16 +39,18 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang='en'>
+    <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NextIntlClientProvider>
-          <ThemeProvider>
-            <div className={styles.app}>
-              <Sidebar />
-              <main className={styles.main}>{children}</main>
-            </div>
-          </ThemeProvider>
-        </NextIntlClientProvider>
+        <StoreProvider>
+          <NextIntlClientProvider>
+            <ThemeProvider>
+              <div className={styles.app}>
+                <Sidebar />
+                <main className={styles.main}>{children}</main>
+              </div>
+            </ThemeProvider>
+          </NextIntlClientProvider>
+        </StoreProvider>
       </body>
     </html>
   );

@@ -3,21 +3,21 @@
     {
       "id": "1",
       "email": "admin@example.com",
-      "password": "$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/VcSAg/9qK",
+      "password": "$2b$12$8DkKr1RBBfE6U4HlFzM9UuVkjfLtQJj11GQCmbr0979OUHVwMGKRi",
       "name": "Admin User",
       "role": "admin"
     },
     {
       "id": "2",
       "email": "user@example.com",
-      "password": "$2a$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+      "password": "$2b$12$l1Ic2iMoXVTfUSvyC0fwu.u1.w1Up0yKB/0sjmNceFatUV82Szgry",
       "name": "Regular User",
       "role": "user"
     },
     {
       "id": "3",
       "email": "test@test.com",
-      "password": "$2a$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",
+      "password": "$2b$12$Hqgkhr.fj2SA5ZkJ1j8aOuzehVDzNqHh1Kf3G6c/Fp7T.pZFnWafi",
       "name": "Test User",
       "role": "user"
     }

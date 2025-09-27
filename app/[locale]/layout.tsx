@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 
 import styles from "./layout.module.css";
 import Sidebar from "@/components/ui/Sidebar";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,10 +41,12 @@ export default async function RootLayout({
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NextIntlClientProvider>
-          <div className={styles.app}>
-            <Sidebar />
-            <main className={styles.main}>{children}</main>
-          </div>
+          <ThemeProvider>
+            <div className={styles.app}>
+              <Sidebar />
+              <main className={styles.main}>{children}</main>
+            </div>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

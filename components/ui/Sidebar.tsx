@@ -6,6 +6,7 @@ import styles from "./Sidebar.module.css";
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { useTheme } from "@/contexts/ThemeContext";
 
 type LanguageItem = {
   code: (typeof routing.locales)[number];
@@ -24,22 +25,20 @@ const languages: LanguageItem[] = [
 ];
 
 export default function Sidebar() {
+  const { theme, toggleTheme } = useTheme();
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  console.log({ locale, pathname });
 
   const currentLanguage = languages.find((lang) => lang.code === locale);
-  console.log({ currentLanguage });
 
   return (
     <aside className={styles.sidebar}>
       <div className={styles.header}>
         {/* Logout icon here if user is logged in */}
-        <button className={styles.themeToggle} onClick={() => null} title={`Switch to dark mode`}>
-          {/* {"light" ? "🌙" : "☀️"} */}
-          ☀️
+        <button className={styles.themeToggle} onClick={toggleTheme} title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
+          {theme === "light" ? "🌙" : "☀️"}
         </button>
       </div>
 

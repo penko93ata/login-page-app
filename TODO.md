@@ -33,8 +33,8 @@ Create a login page application with the following features:
 - [ ] **Logout Functionality** - Add logout button/link that clears session cookies
 - [ ] **Internationalization** - Set up i18next with English and Bulgarian translations
 - [ ] **Reusable Components**:
-  - [ ] Input component with validation
-  - [ ] Button component
+  - [x] Input component
+  - [x] Button component
   - [ ] Form wrapper component
 - [ ] **Forgot Password Page** - Build forgot password page with email validation
 - [ ] **Success Screens** - Create success components for login and password reset
@@ -55,7 +55,7 @@ Create a login page application with the following features:
 - **Input Validation**: Zod for schema validation and sanitization
 - **Session Management**: HTTP-only cookies with Next.js middleware
 - **Internationalization**: i18next
-- **Styling**: CSS Modules / Tailwind CSS
+- **Styling**: CSS Modules
 - **TypeScript**: For type safety
 
 ## Project Structure (Planned)

@@ -5,6 +5,9 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 
+import styles from "./layout.module.css";
+import Sidebar from "@/components/ui/Sidebar";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,8 +39,12 @@ export default async function RootLayout({
   return (
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
-        {children}
+        <NextIntlClientProvider>
+          <div className={styles.app}>
+            <Sidebar />
+            <main className={styles.main}>{children}</main>
+          </div>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -1,0 +1,224 @@
+.sidebar {
+  width: 280px;
+  /* Using CSS custom properties for theming */
+  background-color: var(--color-sidebar);
+  color: var(--color-sidebar-foreground);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  /* Added responsive design */
+  transition: all 0.3s ease;
+}
+
+.header {
+  padding: 2rem 1.5rem;
+  /* Using themed border color */
+  border-bottom: 1px solid var(--color-sidebar-border);
+  /* Added flex layout for theme toggle */
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  /* Using themed color */
+  color: var(--color-sidebar-foreground);
+}
+
+/* Added theme toggle button styles */
+.themeToggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.themeToggle:hover {
+  background-color: var(--color-sidebar-accent);
+}
+
+.navigation {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.navItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  /* Using themed colors */
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.navItem:hover {
+  /* Using themed colors */
+  background-color: var(--color-sidebar-accent);
+  color: var(--color-sidebar-accent-foreground);
+}
+
+.navItem.active {
+  /* Using themed colors */
+  background-color: var(--color-sidebar-primary);
+  color: var(--color-sidebar-primary-foreground);
+  border-right: 4px solid var(--color-sidebar-primary);
+}
+
+.navLabel {
+  font-weight: 500;
+}
+
+.languageSelector {
+  position: relative;
+  padding: 1rem 1.5rem;
+  /* Using themed border color */
+  border-top: 1px solid var(--color-sidebar-border);
+}
+
+.languageButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  /* Using themed colors */
+  background-color: var(--color-sidebar-accent);
+  border: none;
+  border-radius: 6px;
+  color: var(--color-sidebar-accent-foreground);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.languageButton:hover {
+  /* Using themed colors */
+  background-color: var(--color-muted);
+}
+
+.languageFlag {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.languageName {
+  flex: 1;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.dropdownArrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+
+.dropdownArrow.open {
+  transform: rotate(180deg);
+}
+
+.languageDropdown {
+  position: absolute;
+  bottom: 100%;
+  left: 1.5rem;
+  right: 1.5rem;
+  /* Using themed colors */
+  background-color: var(--color-sidebar-accent);
+  border-radius: 6px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.languageOption {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background: none;
+  border: none;
+  /* Using themed colors */
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.languageOption:hover {
+  /* Using themed colors */
+  background-color: var(--color-muted);
+  color: var(--color-sidebar-accent-foreground);
+}
+
+.languageOption.selected {
+  /* Using themed colors */
+  background-color: var(--color-sidebar-primary);
+  color: var(--color-sidebar-primary-foreground);
+}
+
+.languageOption .languageFlag {
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+}
+
+.languageOption .languageName {
+  font-size: 0.9rem;
+}
+
+/* Added responsive design for mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .header {
+    padding: 1rem 1.5rem;
+  }
+
+  .navigation {
+    padding: 0.5rem 0;
+  }
+
+  .navItem {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .languageSelector {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    max-height: 150px;
+  }
+
+  .header {
+    padding: 0.75rem 1rem;
+  }
+
+  .themeToggle {
+    font-size: 1rem;
+    padding: 0.25rem;
+  }
+
+  .navItem {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .navIcon {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+}

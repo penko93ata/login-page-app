@@ -1,0 +1,36 @@
+.app {
+  display: flex;
+  min-height: 100vh;
+  /* Using CSS custom properties for theming */
+  background-color: var(--color-background);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  /* Added responsive design */
+  flex-direction: row;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Added responsive padding */
+  min-width: 0; /* Prevents flex item from overflowing */
+}
+
+/* Added responsive breakpoints */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .main {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 0.5rem;
+  }
+}

@@ -1,4 +1,4 @@
-import { Button, Input } from "@/components/ui";
+import { Button, FormField, Input } from "@/components/ui";
 import styles from "./page.module.css";
 import { useTranslations } from "next-intl";
 
@@ -25,7 +25,11 @@ export default function Home() {
         <Button loading variant='secondary'>
           Loading
         </Button>
-        <Input type='email' />
+        <Input type='email' placeholder='Email' />
+
+        <FormField label='Email' type='email' placeholder='your@email.com' required />
+
+        <FormField label='Password' type='password' placeholder='••••••••' errorMessage='Password must be at least 8 characters' required />
       </div>
     </div>
   );

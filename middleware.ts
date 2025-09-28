@@ -16,6 +16,26 @@ export async function middleware(request: NextRequest) {
   const cookie = request.cookies.get("session")?.value;
   const session = await decryptSession(cookie);
 
+  // Check for reset-password access control
+  if (path === "/reset-password" || path.includes("/reset-password")) {
+    const resetAccessToken = request.cookies.get("reset-access")?.value;
+
+    // If no reset access token, redirect to forgot-password
+    if (!resetAccessToken) {
+      return NextResponse.redirect(new URL("/forgot-password", request.url));
+    }
+
+    // Verify the reset access token
+    try {
+      const accessData = await decryptSession(resetAccessToken);
+      if (!accessData || accessData.type !== "reset-access") {
+        return NextResponse.redirect(new URL("/forgot-password", request.url));
+      }
+    } catch (error) {
+      return NextResponse.redirect(new URL("/forgot-password", request.url));
+    }
+  }
+
   if (isProtectedRoute && !session) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }

@@ -1,0 +1,10 @@
+.resetPasswordContainer {
+  padding: 2rem;
+  text-align: center;
+}
+
+.resetPasswordContainer p {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #666;
+}

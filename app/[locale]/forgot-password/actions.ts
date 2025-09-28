@@ -4,6 +4,7 @@ import z from "zod";
 import { forgotPasswordSchema } from "@/schemas/form.schema";
 import { findUserByEmail } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { createResetAccess } from "@/lib/session";
 
 // Type for the treeified error structure
 export type ForgotPasswordActionState =
@@ -42,17 +43,16 @@ export async function forgotPassword(prevState: unknown, formData: FormData): Pr
       };
     }
 
-    // TODO: In a real app, you would:
-    // 1. Generate a secure reset token
-    // 2. Store it in the database with expiration
-    // 3. Send an email with the reset link
-    // For now, we'll just simulate success and redirect
-
-    // Return success instead of redirecting immediately
-    return {
-      success: true,
-    };
+    // Create reset access token (allows access to reset-password page)
+    await createResetAccess(user.id);
+    // Redirect to reset-password page (now accessible due to access token)
+    redirect("/reset-password");
   } catch (error) {
+    // Don't log NEXT_REDIRECT as an error - it's expected behavior
+    if (error instanceof Error && error.message === "NEXT_REDIRECT") {
+      throw error; // Re-throw redirect errors
+    }
+
     console.error("Forgot password failed:", error);
     return {
       errors: {

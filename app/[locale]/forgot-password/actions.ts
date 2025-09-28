@@ -1,10 +1,10 @@
 "use server";
 
 import z from "zod";
-import { forgotPasswordSchema } from "@/schemas/form.schema";
 import { findUserByEmail } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { createResetAccess } from "@/lib/session";
+import { getForgotPasswordSchema } from "@/schemas/form.schema";
 
 // Type for the treeified error structure
 export type ForgotPasswordActionState =
@@ -22,6 +22,7 @@ export type ForgotPasswordActionState =
   | undefined;
 
 export async function forgotPassword(prevState: unknown, formData: FormData): Promise<ForgotPasswordActionState> {
+  const forgotPasswordSchema = await getForgotPasswordSchema();
   const result = forgotPasswordSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {

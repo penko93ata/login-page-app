@@ -2,7 +2,7 @@
 
 import { validateCredentials, getCurrentUser } from "@/lib/auth";
 import { createSession, deleteSession } from "@/lib/session";
-import { loginSchema } from "@/schemas/form.schema";
+import { getLoginSchema } from "@/schemas/form.schema";
 import { redirect } from "next/navigation";
 import z from "zod";
 
@@ -31,6 +31,7 @@ export type LoginActionState =
   | undefined;
 
 export async function login(prevState: unknown, formData: FormData): Promise<LoginActionState> {
+  const loginSchema = await getLoginSchema();
   const result = loginSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {

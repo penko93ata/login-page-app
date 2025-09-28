@@ -8,6 +8,8 @@ First, run the development server:
 # install dependencies
 npm install
 
+# Add .env file with SESSION_SECRET variable
+
 npm run dev
 # or
 yarn dev

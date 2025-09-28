@@ -80,12 +80,7 @@
     "expiryInfo": "Access expires in 5 minutes."
   },
   "HomePage": {
-    "title": "Welcome",
-    "subtitle": "You are successfully logged in.",
-    "pleaseLogIn": "Please log in to access this page.",
-    "loggedInAs": "Logged in as",
-    "lastLogin": "Last login",
-    "accountType": "Account type"
+    "welcomeMessage": "Welcome"
   },
   "Sidebar": {
     "logout": "Logout",

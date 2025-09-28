@@ -14,20 +14,16 @@ const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const isDarkModePreferred = useIsDarkMode();
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>((localStorage.getItem("theme") as Theme) ?? "light");
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   useEffect(() => {
-    // Check if we're in the browser
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme") as Theme;
-      if (savedTheme) {
-        setTheme(savedTheme);
-        return;
-      }
+    const savedTheme = localStorage.getItem("theme") as Theme;
+    if (savedTheme) {
+      return setTheme(savedTheme);
     }
 
     setTheme(isDarkModePreferred ? "dark" : "light");
@@ -37,11 +33,7 @@ export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     // Apply theme to document
     document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme);
-
-    // Save to localStorage only in browser
-    if (typeof window !== "undefined") {
-      localStorage.setItem("theme", theme);
-    }
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;

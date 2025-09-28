@@ -62,7 +62,7 @@ export default function Sidebar() {
         </button>
         {isAuthenticated && (
           <button className={styles.logoutButton} onClick={logout} title={t("logout")} aria-label={tSidebar("logout")}>
-            🚪
+            ➜
           </button>
         )}
       </div>

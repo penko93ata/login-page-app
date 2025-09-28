@@ -57,29 +57,6 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.error = null;
     },
-
-    // Action to clear user when logout or session expires
-    clearUser: (state) => {
-      state.user = null;
-      state.isAuthenticated = false;
-      state.error = null;
-    },
-
-    // Action to set loading state
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
-    },
-
-    // Action to set error
-    setError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
-      state.isLoading = false;
-    },
-
-    // Action to clear error
-    clearError: (state) => {
-      state.error = null;
-    },
   },
   extraReducers: (builder) => {
     // Handle checkAuth async thunk
@@ -118,5 +95,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser, setLoading, setError, clearError } = authSlice.actions;
+export const { setUser } = authSlice.actions;
 export default authSlice.reducer;

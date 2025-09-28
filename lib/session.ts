@@ -3,8 +3,7 @@ import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
 import crypto from "crypto";
 
-const secretKey = process.env.SESSION_SECRET || "your-secret-key-here-change-in-production";
-const encodedKey = new TextEncoder().encode(secretKey);
+const encodedKey = new TextEncoder().encode(process.env.SESSION_SECRET);
 
 type SessionPayload = { userId: string; expiresAt: Date };
 

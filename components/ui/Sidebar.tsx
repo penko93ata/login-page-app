@@ -10,6 +10,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Link from "next/link";
 import { useAuth } from "@/lib/features/auth/useAuth";
 import { LogOut, Moon, Sun } from "lucide-react";
+import { Button } from "./Button";
 
 type LanguageItem = {
   code: (typeof routing.locales)[number];
@@ -58,13 +59,19 @@ export default function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.header}>
-        <button className={styles.themeToggle} onClick={toggleTheme} title={getThemeToggleTitle()} aria-label={tSidebar("themeToggle")}>
+        <Button
+          variant='outline'
+          className={styles.themeToggle}
+          onClick={toggleTheme}
+          title={getThemeToggleTitle()}
+          aria-label={tSidebar("themeToggle")}
+        >
           {theme === "light" ? <Moon color='black' /> : <Sun color='white' />}
-        </button>
+        </Button>
         {isAuthenticated && (
-          <button className={styles.themeToggle} onClick={logout} title={t("logout")} aria-label={tSidebar("logout")}>
+          <Button variant='outline' className={styles.themeToggle} onClick={logout} title={t("logout")} aria-label={tSidebar("logout")}>
             <LogOut color={theme === "dark" ? "white" : "black"} />
-          </button>
+          </Button>
         )}
       </div>
 
@@ -79,7 +86,8 @@ export default function Sidebar() {
       </nav>
 
       <div className={styles.languageSelector}>
-        <button
+        <Button
+          variant='outline'
           className={styles.languageButton}
           onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
           aria-label={tSidebar("languageSelector")}
@@ -87,7 +95,7 @@ export default function Sidebar() {
           <span className={styles.languageFlag}>{currentLanguage?.flag}</span>
           <span className={styles.languageName}>{currentLanguage?.name}</span>
           <span className={`${styles.dropdownArrow} ${isLanguageDropdownOpen ? styles.open : ""}`}>▼</span>
-        </button>
+        </Button>
 
         {isLanguageDropdownOpen && (
           <div className={styles.languageDropdown}>

@@ -2,21 +2,9 @@
 
 import { validateCredentials, getCurrentUser } from "@/lib/auth";
 import { createSession, deleteSession } from "@/lib/session";
+import { emailSchema, loginSchema, passwordSchema } from "@/schemas/form.schema";
 import { redirect } from "next/navigation";
 import z from "zod";
-
-const passwordSchema = z
-  .string()
-  .min(9, "Password must be more than 8 characters")
-  .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-  .regex(/[0-9]/, "Password must contain at least one number")
-  .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character")
-  .trim();
-
-const loginSchema = z.object({
-  email: z.string().email("Invalid email address").min(1, "Email is required").trim(),
-  password: passwordSchema,
-});
 
 // Type for the treeified error structure
 export type LoginActionState =

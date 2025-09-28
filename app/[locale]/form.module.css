@@ -1,19 +1,26 @@
-.loginFormContainer {
+.formContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
 
-.loginFormHeaderContainer {
+.formHeaderContainer {
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.loginFormHeaderTitle {
+.formHeaderTitle {
   margin-bottom: 0.5rem;
 }
 
-.loginFormHeaderSubtitle {
+.formHeaderSubtitle {
   color: var(--color-muted-foreground);
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

@@ -9,7 +9,7 @@ import { useAuth } from "@/lib/features/auth/useAuth";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import styles from "./LoginForm.module.css";
+import styles from "../form.module.css";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -50,13 +50,13 @@ export default function LoginForm() {
   };
 
   return (
-    <div className={styles.loginFormContainer}>
-      <div className={styles.loginFormHeaderContainer}>
-        <h1 className={styles.loginFormHeaderTitle}>{t("title")}</h1>
-        <p className={styles.loginFormHeaderSubtitle}>{t("subtitle")}</p>
+    <div className={styles.formContainer}>
+      <div className={styles.formHeaderContainer}>
+        <h1 className={styles.formHeaderTitle}>{t("title")}</h1>
+        <p className={styles.formHeaderSubtitle}>{t("subtitle")}</p>
       </div>
 
-      <form action={loginAction} style={{ width: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
+      <form action={loginAction} className={styles.form}>
         {/* Show general errors at the top of the form */}
         {getGeneralError() && (
           <div

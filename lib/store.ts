@@ -6,13 +6,6 @@ export const makeStore = () => {
     reducer: {
       auth: authReducer,
     },
-    // middleware: (getDefaultMiddleware) =>
-    //   getDefaultMiddleware({
-    //     serializableCheck: {
-    //       // Ignore these action types for serialization checks
-    //       ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
-    //     },
-    //   }),
   });
 };
 

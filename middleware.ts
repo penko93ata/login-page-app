@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { decryptSession } from "./lib/session";
 
 const protectedRoutes = ["/"];
-const publicRoutes = ["/login", "/forgot-password", "/about", "/contact"];
+const publicRoutes = ["/login", "/forgot-password"];
 
 const intlMiddleware = createMiddleware(routing);
 

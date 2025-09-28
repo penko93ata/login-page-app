@@ -1,17 +1,20 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import styles from "./page.module.css";
 
 export default function ResetPasswordPage() {
+  const t = useTranslations("ResetPasswordPage");
+
   return (
     <div className={styles.resetPasswordContainer}>
-      <h1>Reset Password Page</h1>
-      <p>You have successfully accessed the reset password page!</p>
+      <h1>{t("title")}</h1>
+      <p>{t("subtitle")}</p>
 
       <p className={styles.resetPasswordContainer}>
-        This page is only accessible through the forgot password flow.
+        {t("accessInfo")}
         <br />
-        Access expires in 5 minutes.
+        {t("expiryInfo")}
       </p>
     </div>
   );

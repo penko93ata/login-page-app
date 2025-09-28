@@ -73,6 +73,12 @@
       "sendFailed": "Failed to send reset link. Please try again."
     }
   },
+  "ResetPasswordPage": {
+    "title": "Reset Password Page",
+    "subtitle": "You have successfully accessed the reset password page!",
+    "accessInfo": "This page is only accessible through the forgot password flow.",
+    "expiryInfo": "Access expires in 5 minutes."
+  },
   "HomePage": {
     "title": "Welcome",
     "subtitle": "You are successfully logged in.",

@@ -9,6 +9,7 @@ import { routing } from "@/i18n/routing";
 import { useTheme } from "@/contexts/ThemeContext";
 import Link from "next/link";
 import { useAuth } from "@/lib/features/auth/useAuth";
+import { LogOut, Moon, Sun } from "lucide-react";
 
 type LanguageItem = {
   code: (typeof routing.locales)[number];
@@ -58,11 +59,11 @@ export default function Sidebar() {
     <aside className={styles.sidebar}>
       <div className={styles.header}>
         <button className={styles.themeToggle} onClick={toggleTheme} title={getThemeToggleTitle()} aria-label={tSidebar("themeToggle")}>
-          {theme === "light" ? "🌙" : "☀️"}
+          {theme === "light" ? <Moon color='black' /> : <Sun color='white' />}
         </button>
         {isAuthenticated && (
-          <button className={styles.logoutButton} onClick={logout} title={t("logout")} aria-label={tSidebar("logout")}>
-            ➜
+          <button className={styles.themeToggle} onClick={logout} title={t("logout")} aria-label={tSidebar("logout")}>
+            <LogOut color={theme === "dark" ? "white" : "black"} />
           </button>
         )}
       </div>

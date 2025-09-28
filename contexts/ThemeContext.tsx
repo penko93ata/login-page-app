@@ -14,7 +14,8 @@ const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const isDarkModePreferred = useIsDarkMode();
-  const [theme, setTheme] = useState<Theme>((localStorage.getItem("theme") as Theme) ?? "light");
+  const [theme, setTheme] = useState<Theme | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -23,18 +24,26 @@ export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as Theme;
     if (savedTheme) {
-      return setTheme(savedTheme);
+      setTheme(savedTheme);
+    } else {
+      setTheme(isDarkModePreferred ? "dark" : "light");
     }
-
-    setTheme(isDarkModePreferred ? "dark" : "light");
+    setIsLoaded(true);
   }, [isDarkModePreferred]);
 
   useEffect(() => {
-    // Apply theme to document
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
-    localStorage.setItem("theme", theme);
+    if (theme) {
+      // Apply theme to document
+      document.documentElement.classList.remove("light", "dark");
+      document.documentElement.classList.add(theme);
+      localStorage.setItem("theme", theme);
+    }
   }, [theme]);
+
+  // Don't render children until theme is determined
+  if (!isLoaded || !theme) {
+    return null;
+  }
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 };

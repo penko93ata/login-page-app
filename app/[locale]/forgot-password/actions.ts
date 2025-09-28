@@ -5,6 +5,7 @@ import { findUserByEmail } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { createResetAccess } from "@/lib/session";
 import { getForgotPasswordSchema } from "@/schemas/form.schema";
+import { getTranslations } from "next-intl/server";
 
 // Type for the treeified error structure
 export type ForgotPasswordActionState =
@@ -24,6 +25,7 @@ export type ForgotPasswordActionState =
 export async function forgotPassword(prevState: unknown, formData: FormData): Promise<ForgotPasswordActionState> {
   const forgotPasswordSchema = await getForgotPasswordSchema();
   const result = forgotPasswordSchema.safeParse(Object.fromEntries(formData));
+  const t = await getTranslations("ForgotPasswordPage.errors");
 
   if (!result.success) {
     return {
@@ -39,7 +41,7 @@ export async function forgotPassword(prevState: unknown, formData: FormData): Pr
     if (!user) {
       return {
         errors: {
-          errors: ["No account found with this email address"],
+          errors: [t("userNotFound")],
         },
       };
     }
@@ -57,7 +59,7 @@ export async function forgotPassword(prevState: unknown, formData: FormData): Pr
     console.error("Forgot password failed:", error);
     return {
       errors: {
-        errors: ["Failed to send reset link. Please try again."],
+        errors: [t("sendFailed")],
       },
     };
   }

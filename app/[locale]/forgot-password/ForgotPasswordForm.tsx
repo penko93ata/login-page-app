@@ -1,3 +1,5 @@
+"use client";
+
 import { useActionState } from "react";
 import styles from "../form.module.css";
 import { forgotPassword } from "./actions";

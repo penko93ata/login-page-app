@@ -2,7 +2,7 @@
 
 import { validateCredentials, getCurrentUser } from "@/lib/auth";
 import { createSession, deleteSession } from "@/lib/session";
-import { emailSchema, loginSchema, passwordSchema } from "@/schemas/form.schema";
+import { loginSchema } from "@/schemas/form.schema";
 import { redirect } from "next/navigation";
 import z from "zod";
 

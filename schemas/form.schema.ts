@@ -9,3 +9,12 @@ export const passwordSchema = z
   .trim();
 
 export const emailSchema = z.email({ error: "Invalid email address" }).min(1, "Email is required").trim();
+
+export const loginSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema,
+});
+
+export const forgotPasswordSchema = z.object({
+  email: emailSchema,
+});

@@ -3,23 +3,17 @@
     {
       "id": "1",
       "email": "admin@example.com",
-      "password": "$2b$12$8DkKr1RBBfE6U4HlFzM9UuVkjfLtQJj11GQCmbr0979OUHVwMGKRi",
-      "name": "Admin User",
-      "role": "admin"
+      "password": "$2b$12$8DkKr1RBBfE6U4HlFzM9UuVkjfLtQJj11GQCmbr0979OUHVwMGKRi"
     },
     {
       "id": "2",
       "email": "user@example.com",
-      "password": "$2b$12$l1Ic2iMoXVTfUSvyC0fwu.u1.w1Up0yKB/0sjmNceFatUV82Szgry",
-      "name": "Regular User",
-      "role": "user"
+      "password": "$2b$12$l1Ic2iMoXVTfUSvyC0fwu.u1.w1Up0yKB/0sjmNceFatUV82Szgry"
     },
     {
       "id": "3",
       "email": "test@test.com",
-      "password": "$2b$12$Hqgkhr.fj2SA5ZkJ1j8aOuzehVDzNqHh1Kf3G6c/Fp7T.pZFnWafi",
-      "name": "Test User",
-      "role": "user"
+      "password": "$2b$12$Hqgkhr.fj2SA5ZkJ1j8aOuzehVDzNqHh1Kf3G6c/Fp7T.pZFnWafi"
     }
   ]
 }

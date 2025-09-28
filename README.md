@@ -21,11 +21,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## User credentials to use for login
+## Dummy user credentials to use for login
 
 ```
 admin@example.com: Admin123!
@@ -33,17 +29,31 @@ user@example.com: Password1@
 test@test.com: TestUser9#
 ```
 
-## Learn More
+## Security Considerations
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Input Validation & Sanitization**: Zod is used to validate/sanitize user input with comprehensive schema validation
+- **Session Management**: User sessions are stored in encrypted JWT cookies using the `SESSION_SECRET` environment variable
+- **Password Security**:
+  - Passwords are hashed using bcryptjs with salt rounds of 12
+  - Strong password requirements enforced (9+ chars, uppercase, number, special character)
+  - Passwords are never returned in API responses (stripped from user objects)
+- **Authentication & Authorization**:
+  - Route protection via Next.js middleware for protected/public routes
+  - Automatic redirect logic based on authentication status
+  - Session validation on every protected route access
+- **Cookie Security**:
+  - HttpOnly cookies prevent XSS attacks
+  - Secure flag ensures cookies only sent over HTTPS
+  - Automatic session cleanup and expiration (7 days)
+- **Reset Password Flow Security**:
+  - Time-limited reset access tokens (5 minutes expiration)
+  - Separate token validation for reset password page access
+  - Automatic cleanup of reset tokens after successful login
+- **Environment Variable Validation**:
+  - Type-safe environment variable validation using @t3-oss/env-nextjs
+  - Required security variables validated at build time
+- **Server-Side Security**:
+  - "server-only" imports ensure sensitive code doesn't leak to client
+  - JWT tokens use HS256 algorithm with proper key encoding
+  - Error handling prevents information leakage (generic error messages)
+- **Case-Insensitive Email Handling**: Email lookups are case-insensitive to prevent enumeration attacks

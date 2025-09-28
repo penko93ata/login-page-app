@@ -39,7 +39,7 @@
     "email": "Email",
     "emailPlaceholder": "your@email.com",
     "password": "Password",
-    "passwordPlaceholder": "•••••••••",
+    "passwordPlaceholder": "••••••••",
     "signIn": "Sign In",
     "signingIn": "Signing In...",
     "forgotPassword": "Forgot Password?",
@@ -57,9 +57,26 @@
       "passwordMissingSpecialChar": "Password must contain at least one special character"
     }
   },
+  "ForgotPasswordPage": {
+    "title": "Forgot Password",
+    "subtitle": "Enter your email address and we'll send you a link to reset your password.",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "sendResetLink": "Send Reset Link",
+    "sendingResetLink": "Sending Reset Link...",
+    "backToLogin": "Back to Login",
+    "success": "Reset link sent! Check your email for instructions.",
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "userNotFound": "No account found with this email address",
+      "sendFailed": "Failed to send reset link. Please try again."
+    }
+  },
   "HomePage": {
     "title": "Welcome",
     "subtitle": "You are successfully logged in.",
+    "pleaseLogIn": "Please log in to access this page.",
     "loggedInAs": "Logged in as",
     "lastLogin": "Last login",
     "accountType": "Account type"

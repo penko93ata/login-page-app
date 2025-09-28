@@ -15,12 +15,10 @@
 
 .button:hover:not(:disabled) {
   opacity: 0.9;
-  transform: translateY(-1px);
 }
 
 .button:active:not(:disabled) {
   opacity: 0.9;
-  transform: translateY(0);
 }
 
 .button:focus-visible {
@@ -144,29 +142,4 @@
 /* Loading state */
 .loading {
   cursor: not-allowed;
-}
-
-/* Spinner animation */
-.spinner {
-  margin-right: 8px;
-  width: 16px;
-  height: 16px;
-  animation: spin 1s linear infinite;
-}
-
-.spinnerCircle {
-  opacity: 0.25;
-}
-
-.spinnerPath {
-  opacity: 0.75;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

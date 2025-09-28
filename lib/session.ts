@@ -1,8 +1,9 @@
 import "server-only";
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
+import { env } from "@/env/server";
 
-const encodedKey = new TextEncoder().encode(process.env.SESSION_SECRET);
+const encodedKey = new TextEncoder().encode(env.SESSION_SECRET);
 
 type SessionPayload = { userId: string; expiresAt: Date };
 

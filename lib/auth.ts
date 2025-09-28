@@ -60,11 +60,6 @@ export async function validateCredentials(email: string, password: string): Prom
   return userWithoutPassword as User;
 }
 
-// Hash password (utility for creating new users)
-export async function hashPassword(password: string): Promise<string> {
-  return bcrypt.hash(password, 12);
-}
-
 // Get current authenticated user
 export async function getCurrentUser(): Promise<User | null> {
   try {
@@ -96,10 +91,3 @@ export async function getCurrentUser(): Promise<User | null> {
     return null;
   }
 }
-
-// For development: Strong passwords that meet the new requirements
-export const DEMO_CREDENTIALS = {
-  "admin@example.com": "Admin123!", // ✅ Strong password
-  "user@example.com": "Password1@", // ✅ Strong password
-  "test@test.com": "TestUser9#", // ✅ Strong password
-} as const;

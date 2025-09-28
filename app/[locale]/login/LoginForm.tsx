@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button, FormField } from "../../../components/ui";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { login } from "./action";
 import { useAuth } from "@/lib/features/auth/useAuth";
@@ -27,10 +27,14 @@ export default function LoginForm() {
   const { setAuthUser } = useAuth();
   const router = useRouter();
   const t = useTranslations("LoginPage");
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   // Handle successful login
   useEffect(() => {
     if (state?.success && state?.user) {
+      // Set redirecting state to hide form during navigation
+      setIsRedirecting(true);
+
       // Set user in Redux store
       setAuthUser(state.user);
 
@@ -48,6 +52,23 @@ export default function LoginForm() {
   const getGeneralError = (): string | undefined => {
     return state?.errors?.errors?.[0];
   };
+
+  // Show loading state during redirect
+  if (isRedirecting) {
+    return (
+      <div className={styles.formContainer}>
+        <div className={styles.formHeaderContainer}>
+          <h1 className={styles.formHeaderTitle}>{t("title")}</h1>
+          <p className={styles.formHeaderSubtitle}>{t("redirecting", { default: "Redirecting..." })}</p>
+        </div>
+        <div className={styles.formRedirecting}>
+          <Button size='lg' variant='primary' loading={true} disabled={true}>
+            {t("redirecting", { default: "Redirecting..." })}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.formContainer}>
@@ -96,7 +117,7 @@ export default function LoginForm() {
         <SubmitButton />
       </form>
 
-      <div style={{ textAlign: "center", marginTop: "1rem" }}>
+      <div className={styles.forgotPasswordLink}>
         <Link href='/forgot-password'>{t("forgotPassword")}</Link>
       </div>
     </div>

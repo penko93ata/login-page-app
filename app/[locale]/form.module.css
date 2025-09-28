@@ -24,3 +24,13 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+.formRedirecting {
+  text-align: center;
+  padding: 2rem;
+}
+
+.forgotPasswordLink {
+  text-align: center;
+  margin-top: 1rem;
+}

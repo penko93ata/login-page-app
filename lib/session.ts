@@ -1,7 +1,6 @@
 import "server-only";
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
-import crypto from "crypto";
 
 const encodedKey = new TextEncoder().encode(process.env.SESSION_SECRET);
 
@@ -31,7 +30,6 @@ export async function createResetAccess(userId: string) {
   const accessToken = await new SignJWT({
     userId,
     type: "reset-access",
-    nonce: crypto.randomBytes(8).toString("hex"),
   })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()

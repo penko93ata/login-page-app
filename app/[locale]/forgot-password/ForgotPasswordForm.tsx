@@ -57,22 +57,6 @@ export default function ForgotPasswordForm() {
           </div>
         )}
 
-        {/* Show success message */}
-        {state?.success && (
-          <div
-            style={{
-              color: "var(--color-success)",
-              marginBottom: "1rem",
-              padding: "0.75rem",
-              backgroundColor: "var(--color-success-foreground)",
-              borderRadius: "6px",
-              border: "1px solid var(--color-success)",
-            }}
-          >
-            {t("success")}
-          </div>
-        )}
-
         <FormField
           label={t("email")}
           name='email'

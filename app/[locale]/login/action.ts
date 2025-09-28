@@ -3,6 +3,7 @@
 import { validateCredentials, getCurrentUser } from "@/lib/auth";
 import { createSession, deleteSession } from "@/lib/session";
 import { getLoginSchema } from "@/schemas/form.schema";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import z from "zod";
 
@@ -33,6 +34,7 @@ export type LoginActionState =
 export async function login(prevState: unknown, formData: FormData): Promise<LoginActionState> {
   const loginSchema = await getLoginSchema();
   const result = loginSchema.safeParse(Object.fromEntries(formData));
+  const t = await getTranslations("LoginPage.errors");
 
   if (!result.success) {
     return {
@@ -47,9 +49,7 @@ export async function login(prevState: unknown, formData: FormData): Promise<Log
 
     if (!user) {
       return {
-        errors: {
-          errors: ["Invalid email or password"],
-        },
+        errors: { errors: [t("invalidCredentials")] },
       };
     }
 
@@ -69,7 +69,7 @@ export async function login(prevState: unknown, formData: FormData): Promise<Log
     console.error("Login failed:", error);
     return {
       errors: {
-        errors: ["Login failed. Please try again."],
+        errors: [t("loginFailed")],
       },
     };
   }
